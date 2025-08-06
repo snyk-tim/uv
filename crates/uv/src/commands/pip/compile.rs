@@ -439,6 +439,9 @@ pub(crate) async fn pip_compile(
                 ExportFormat::PylockToml => {
                     read_pylock_toml_requirements(output_file, &upgrade).await?
                 }
+                ExportFormat::CycloneDx16Json => {
+                    return Err(anyhow::anyhow!("CycloneDX format is not supported by pip compile; use uv export --format cyclonedx1.6+json instead"))
+                }
             }
         } else {
             LockedRequirements::default()
@@ -716,6 +719,9 @@ pub(crate) async fn pip_compile(
             // Convert the resolution to a `pylock.toml` file.
             let export = PylockToml::from_resolution(&resolution, &no_emit_packages, install_path)?;
             write!(writer, "{}", export.to_toml()?)?;
+        }
+        ExportFormat::CycloneDx16Json => {
+            return Err(anyhow::anyhow!("CycloneDX format is not supported by pip compile; use uv export --format cyclonedx1.6+json instead"))
         }
     }
 

@@ -52,7 +52,7 @@ use uv_workspace::WorkspaceMember;
 use crate::fork_strategy::ForkStrategy;
 pub(crate) use crate::lock::export::PylockTomlPackage;
 pub use crate::lock::export::RequirementsTxtExport;
-pub use crate::lock::export::{PylockToml, PylockTomlErrorKind};
+pub use crate::lock::export::{PylockToml, PylockTomlErrorKind, CycloneDxExport};
 pub use crate::lock::installable::Installable;
 pub use crate::lock::map::PackageMap;
 pub use crate::lock::tree::TreeDisplay;

@@ -987,7 +987,7 @@ pub enum ProjectCommand {
     Lock(LockArgs),
     /// Export the project's lockfile to an alternate format.
     ///
-    /// At present, both `requirements.txt` and `pylock.toml` (PEP 751) formats are supported.
+    /// At present, `requirements.txt`, `pylock.toml` (PEP 751), and `sbom` (CycloneDX) formats are supported.
     ///
     /// The project is re-locked before exporting unless the `--locked` or `--frozen` flag is
     /// provided.
@@ -4042,7 +4042,7 @@ pub struct TreeArgs {
 pub struct ExportArgs {
     /// The format to which `uv.lock` should be exported.
     ///
-    /// Supports both `requirements.txt` and `pylock.toml` (PEP 751) output formats.
+    /// Supports `requirements.txt`, `pylock.toml` (PEP 751), and `cyclonedx1.6+json` (CycloneDX SBOM) output formats.
     ///
     /// uv will infer the output format from the file extension of the output file, if
     /// provided. Otherwise, defaults to `requirements.txt`.

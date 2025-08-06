@@ -14,7 +14,7 @@ use uv_configuration::{
 use uv_normalize::{DefaultExtras, DefaultGroups, PackageName};
 use uv_python::{PythonDownloads, PythonPreference, PythonRequest};
 use uv_requirements::is_pylock_toml;
-use uv_resolver::{PylockToml, RequirementsTxtExport};
+use uv_resolver::{PylockToml, RequirementsTxtExport, CycloneDxExport};
 use uv_scripts::Pep723Script;
 use uv_settings::PythonInstallMirrors;
 use uv_workspace::{DiscoveryOptions, MemberDiscovery, VirtualProject, Workspace, WorkspaceCache};
@@ -348,6 +348,21 @@ pub(crate) async fn export(
                 writeln!(writer, "{}", format!("#    {}", cmd()).green())?;
             }
             write!(writer, "{}", export.to_toml()?)?;
+        }
+        ExportFormat::CycloneDx16Json => {
+            let export = CycloneDxExport::from_lock(
+                &target,
+                &prune,
+                &extras,
+                &groups,
+                include_annotations,
+                editable,
+                hashes,
+                &install_options,
+            )?;
+
+            // SBOM format doesn't support headers like other formats
+            write!(writer, "{export}")?;
         }
     }
 

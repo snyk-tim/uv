@@ -184,6 +184,7 @@ tracing-tree = { version = "0.4.0" }
 unicode-width = { version = "0.2.0" }
 unscanny = { version = "0.1.0" }
 url = { version = "2.5.2", features = ["serde"] }
+uuid = { version = "1.0", features = ["v4", "serde"] }
 version-ranges = { git = "https://github.com/astral-sh/pubgrub", rev = "06ec5a5f59ffaeb6cf5079c6cb184467da06c9db" }
 walkdir = { version = "2.5.0" }
 which = { version = "8.0.0", features = ["regex"] }
